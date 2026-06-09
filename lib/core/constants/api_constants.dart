@@ -5,12 +5,14 @@ class ApiConstants {
 
   static const String apiToken = '60e797fb087d5fdb4a729d88bf9b2213';
 
-  static const String baseUrl = 'https://superheroapi.com/api/$apiToken';
+  // Базовий URL залишаємо порожнім, бо DioClient.instance використовує свій baseUrl з 'www.' та 'api.php/'
+  static const String baseUrl = 'https://www.superheroapi.com/api.php/$apiToken/';
 
-  static String searchUrl(String query) => '$baseUrl/search/$query';
+  // Тільки відносні шляхи, щоб Dio не ігнорував налаштування проксі/домену
+  static String searchUrl(String query) => 'search/$query';
+  static String heroDetailUrl(int id) => '$id';
 
-  static String heroDetailUrl(int id) => '$baseUrl/$id';
-
-  static const Duration connectTimeout = Duration(seconds: 10);
-  static const Duration receiveTimeout = Duration(seconds: 15);
+  // Тайм-аути для запитів
+  static const Duration connectTimeout = Duration(seconds: 30);
+  static const Duration receiveTimeout = Duration(seconds: 30);
 }
